@@ -1,0 +1,31 @@
+from collections import deque
+
+def bidirectional(graph, start, goal):
+    q1, q2 = deque([start]), deque([goal])
+    v1, v2 = {start}, {goal}
+
+    while q1 and q2:
+        a = q1.popleft()
+        if a in v2:
+            return True
+        for x in graph[a]:
+            if x not in v1:
+                v1.add(x)
+                q1.append(x)
+
+        b = q2.popleft()
+        if b in v1:
+            return True
+        for x in graph[b]:
+            if x not in v2:
+                v2.add(x)
+                q2.append(x)
+
+    return False
+
+graph = {
+    'A':['B'], 'B':['A','C'], 'C':['B','D'],
+    'D':['C','E'], 'E':['D']
+}
+
+print(bidirectional(graph, 'A', 'E'))
