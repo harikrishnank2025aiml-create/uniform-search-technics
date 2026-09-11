@@ -1,0 +1,17 @@
+def dls(graph, node, depth):
+    print(node, end=" ")
+
+    if depth == 0:
+        return
+
+    for child in graph[node]:
+        dls(graph, child, depth - 1)
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [], 'E': [], 'F': []
+}
+
+dls(graph, 'A', 2)
